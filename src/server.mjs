@@ -1,15 +1,7 @@
-import http from 'node:http';
+import { createApp } from './http/app.mjs';
 
 export function createServer() {
-  return http.createServer((request, response) => {
-    if (request.method === 'GET' && request.url === '/health') {
-      response.writeHead(200, { 'content-type': 'application/json; charset=utf-8' });
-      response.end(JSON.stringify({ status: 'ok' }));
-      return;
-    }
-    response.writeHead(404, { 'content-type': 'application/json; charset=utf-8' });
-    response.end(JSON.stringify({ error: 'not_found' }));
-  });
+  return createApp();
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
